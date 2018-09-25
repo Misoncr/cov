@@ -1,0 +1,217 @@
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Zariadenia</h3>
+    </div>
+	<?php echo $this->flashSession->output(); ?>
+    <div class="title_right">
+      <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <a href="/device_controller/devsetup/addDevice/" class="btn btn-success" ><i class="fa fa-plus"></i> Nové zariadenie</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  
+<div class="row">
+    <!-- Start to do list -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+		<?php 
+		foreach($data as $entry){
+			echo "<div class=\"row x_panel_2 device_element\">";
+				echo "<div class=\"x_title_2\">";
+					echo "<ul class=\"list-inline\">";
+						echo "<li class=\"col-md-1\">"
+								. "<a class=\"collapse-link_2\"><i class=\"fa fa-plus\"></i></a>"
+							. "</li>";
+						echo "<li class=\"col-md-1\">"
+								."<a>".$entry->device->id."</a>"
+							. "</li>";
+						echo "<li class=\"col-md-3\">"
+							."<form class=\"form-horizontal class=\"\"\" action=\"/device_controller/devsetup/updateDevice/".$entry->device->id."\" method=\"post\">";
+								echo "<div class=\"form-group-device\">";
+								echo $entry->form->render("name",["class" => "form-control"]);
+								echo "<button class=\"btn btn-info\" type=\"submit\" > <i class=\"fa fa-save\"></i></button>";
+								echo "</div>";
+							echo "</form>"
+							. "</li>";
+						echo "<li class=\"col-md-3 cent-mod-pmp\">";
+							echo "<ul class=\"list-inline\">";
+							foreach ($entry->module_count as $item) {
+								echo "<li class=\"mod_badge\" style=\"background-color:".$item->color."3c\" title=\"".$item->name."\">";
+									echo "<p style=\"color:".$item->color."\">".$item->count."</p>";
+								echo "</li>";
+							}
+								echo "<li class=\"mod_badge_add\" title=\"pridať\">";
+									echo "<p><a href=\"/device_controller/devsetup/addModule/".$entry->device->id."\"><i class=\"fa fa-plus\"></i></a></p>";
+								echo "</li>";
+							echo "</ul>";
+						echo "</li>";
+						echo "<li class=\"col-md-3 cent-mod-pmp\">";
+							echo "<ul class=\"list-inline\">";
+							foreach ($entry->pumpgroup_count as $item) {
+								echo "<li class=\"pmp_badge\" style=\"background-color:".$item->color."3c\" title=\"".$item->name."\">";
+									echo "<p style=\"color:".$item->color."\">".$item->count."</p>";
+								echo "</li>";
+							}
+							echo "<li class=\"pmp_badge_add\" title=\"pridať\">";
+									echo "<p><a href=\"/device_controller/devsetup/addPump/".$entry->device->id."\"><i class=\"fa fa-plus\"></i></a></p>";
+								echo "</li>";
+							echo "</ul>";
+						echo "</li>";
+						echo "<li class=\"col-md-1\">";
+							echo "<a href=\"/device_controller/devsetup/deleteDevice/".$entry->device->id."\""
+								. "class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Vymazať </a>";
+						echo "</li>";
+					echo "</ul>";
+				echo "</div>";
+				echo "<div class=\"x_content_2\">";
+				foreach($entry->modules as $module){
+					echo "<div class=\"row x_panel_2\" >";
+						echo "<div class=\"x_title_2\">";
+							echo "<ul class=\"list-inline\">";
+								echo "<li class=\"col-md-1 inner_element\">"
+										. "<a class=\"collapse-link_2\"><i class=\"fa fa-plus\"></i></a>"
+									. "</li>";
+								echo "<li class=\"col-md-1\"><i class=\"fa fa-puzzle-piece fa-2x\" style=\"color:".$module->color."\"></i></li>";
+								echo "<li class=\"col-md-3\">";
+									echo "<small>typ: </small>".$module->type_name;
+								echo "</li>";
+								echo "<li class=\"col-md-3\">";
+									echo "<small>Názov: </small>".$module->module_name;
+								echo "</li>";
+								echo "<li class=\"col-md-2\">";
+									echo "<small>id na zariadení: </small>".$module->on_device_id;
+								echo "</li>";
+								echo "<li class=\"col-md-2\">";
+								echo "<a href=\"/device_controller/devsetup/deleteModule/".$module->id."\""
+									. "class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Vymazať </a>";
+								echo "</li>";
+							echo "</ul>";
+						echo "</div>";
+						echo "<div class=\"x_content_2\">";
+							echo "<div class=\"col-md-1\"></div>";
+							echo "<form class=\"form-horizontal col-md-11\" action=\"/device_controller/devsetup/updateModule/".$module->id."\" method=\"post\">";
+								echo "<div class=\"form-group\">";
+									echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> id na zariadení: </label>";
+									echo "<div class=\"col-md-2 col-sm-1 col-xs-6\">";
+									echo $moduleForms[$module->id]->render("on_device_id",["class" => "form-control"]);
+									echo "</div>";
+									echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> Adresa: </label>";
+									echo "<div class=\"col-md-2 col-sm-3 col-xs-6\">";
+									echo $moduleForms[$module->id]->render("address",["class" => "form-control"]);
+									echo "</div>";
+									echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> Názov: </label>";
+									echo "<div class=\"col-md-2 col-sm-3 col-xs-6\">";
+									echo $moduleForms[$module->id]->render("name",["class" => "form-control"]);
+									echo "</div>";
+								echo "</div>";
+								echo "<div class=\"form-group\">";
+									echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> Zariadenie: </label>";
+									echo "<div class=\" col-md-2\">";
+									echo $moduleForms[$module->id]->render("id_device", ["class" => "form-control"]);
+									echo "</div>";
+									echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> Typ: </label>";
+									echo "<div class=\" col-md-2\">";
+									echo $moduleForms[$module->id]->render("id_module_type", ["class" => "form-control"]);
+									echo "</div>";
+									echo "<div class=\"col-md-3\">";
+									echo "<input class=\"btn btn-info\" type=\"submit\" value=\"Uložiť zmeny\">";
+									echo "</div>";
+								echo "</div>";
+							echo "</form>";
+						echo "</div>";
+					echo "</div>";
+				}
+				foreach ($entry->pumpgroup_count as $group){
+					echo "<div class=\"row x_panel_2\" >";
+						echo "<div class=\"x_title_2\">";
+							echo "<ul class=\"list-inline\">";
+								echo "<li class=\"col-md-1 inner_element\">"
+										. "<a class=\"collapse-link_2\"><i class=\"fa fa-plus\"></i></a>"
+									. "</li>";
+								echo "<li class=\"col-md-1\"><i class=\"fa fa-tint fa-2x\" style=\"color:".$group->color."\"></i></li>";
+								echo "<li class=\"col-md-3\">";
+									echo "<small>skupina: </small>".$group->name;
+								echo "</li>";
+								echo "<li class=\"col-md-4\">";
+									echo "<small>počet čerpadiel: </small>".$group->count;
+								echo "</li>";
+								echo "<li class=\"col-md-3\">";
+								echo "</li>";
+							echo "</ul>";
+						echo "</div>";
+						echo "<div class=\"x_content_2\">";
+						foreach($entry->pumps[$group->id] as $pump){
+							//var_dump($pump);
+							echo "<div class=\"row x_panel_2\">";
+								echo "<div class=\"x_title_2\">";
+									echo "<ul class=\"list-inline\">";
+										echo "<li class=\"col-md-1 inner_element\">"
+											. "<a class=\"collapse-link_2\"><i class=\"fa fa-plus\"></i></a>"
+										. "</li>";
+										echo "<li class=\"col-md-1\"><i class=\"fa fa-tint fa-2x\" style=\"color:".$group->color."\"></i></li>";
+										echo "<li class=\"col-md-2\">";
+											echo "<small>id na zariadení: </small>".$pump->on_device_id;
+										echo "</li>";
+										echo "<li class=\"col-md-4\">";
+											echo "<small>skupina: </small>".$pump->ps_name;
+										echo "</li>";
+										echo "<li class=\"col-md-2\">";
+											echo "<small>typ: </small>".$pump->pt_name;
+										echo "</li>";
+										echo "<li class=\"col-md-2\">";
+										echo "<a href=\"/device_controller/devsetup/deletePump/".$pump->id."\""
+											. "class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Vymazať </a>";
+										echo "</li>";
+									echo '</ul>';
+								echo "</div>";
+								echo "<div class=\"x_content_2\">";
+									echo "<div class=\"col-md-2\"></div>";
+									echo "<form class=\"form-horizontal col-md-10\" action=\"/device_controller/devsetup/updatePump/".$pump->id."\" method=\"post\">";
+										echo "<div class=\"form-group\">";
+											echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> id na zariadení: </label>";
+											echo "<div class=\"col-md-2 col-sm-3 col-xs-6\">";
+												echo $pumpForms[$entry->device->id][$pump->id]->render("on_device_id",["class" => "form-control"]);
+											echo "</div>";
+											echo "<label class=\"control-label col-md-1 col-sm-3 col-xs-6\"> Adresa: </label>";
+											echo "<div class=\"col-md-3 col-sm-3 col-xs-6\">";
+												echo $pumpForms[$entry->device->id][$pump->id]->render("address",["class" => "form-control"]);
+											echo "</div>";
+											echo "<label class=\"control-label col-md-1 col-sm-3 col-xs-6\"> Device: </label>";
+											echo "<div class=\" col-md-3\">";
+											echo $pumpForms[$entry->device->id][$pump->id]->render("id_device", ["class" => "form-control"]);
+											echo "</div>";
+										echo "</div>";
+										echo "<div class=\"form-group\">";
+											echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> Typ: </label>";
+											echo "<div class=\" col-md-3\">";
+											echo $pumpForms[$entry->device->id][$pump->id]->render("id_pump_type", ["class" => "form-control"]);
+											echo "</div>";
+											echo "<label class=\"control-label col-md-2 col-sm-3 col-xs-6\"> Skupina: </label>";
+											echo "<div class=\"col-md-3\">";
+											echo $pumpForms[$entry->device->id][$pump->id]->render("id_pump_subgroup", ["class" => "form-control"]);
+											echo "</div>";
+											echo "<div class=\"col-md-2\">";
+											echo "<input class=\"btn btn-info\" type=\"submit\" value=\"Uložiť zmeny\">";
+											echo "</div>";
+										echo "</div>";
+									echo "</form>";
+								echo "</div>";
+							echo "</div>";
+						}
+						echo "</div>";
+					echo "</div>";
+				}
+				echo "</div>";
+			echo "</div>";
+		}
+		?>
+    </div>
+    <!-- End to do list -->    
+</div>
+</div>

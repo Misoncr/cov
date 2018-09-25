@@ -1,0 +1,122 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 7, 2018, 5:08:37 PM
+    Author     : Michal
+*/
+
+@media (max-width: 1200px) {
+    .x_title_2 h2 {
+        width: 62%;
+        font-size: 17px
+    }
+    .tile,
+    .graph {
+        zoom: 85%;
+        height: inherit
+    }
+}
+@media (max-width: 1270px) and (min-width: 192px) {
+    .x_title_2 h2 small {
+        display: none
+    }
+}  
+.x_title_2 {
+    padding: 1px 5px 6px;
+    margin-bottom: 10px
+}
+.x_title_2 .filter {
+    width: 40%;
+    float: right
+}
+.x_title_2 h2 {
+    margin: 5px 0 6px;
+    float: left;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+.x_title_2 h2 small {
+    margin-left: 10px
+}
+.x_title_2 span {
+    color: #BDBDBD
+}
+.dashboard_graph .x_title_2 {
+    padding: 5px 5px 7px
+}
+
+.x_content_2{
+    display: none;
+    padding: 0 5px 6px;
+    position: relative;
+    width: 100%;
+    float: left;
+    clear: both;
+    margin-top: 15px
+}
+.x_panel_2 {
+    position: relative;
+    padding: 10px 17px;
+    background: #fff;
+    /*border-bottom: 1px solid #E6E9ED;*/
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    opacity: 1;
+    transition: all .2s ease
+}
+li.cent-mod-pmp{
+    text-align: center
+}
+li.mod_badge{
+    width: 29px;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 5px
+}
+li.mod_badge_add{
+    background-color:#aeaeac;
+    width: 29px;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 5px
+}
+li.pmp_badge{
+    width: 29px;
+    padding: 5px;
+    margin-right: 5px
+}
+li.pmp_badge_add{
+    background-color:#aeaeac;
+    width: 29px;
+    padding: 5px;
+    margin-right: 5px
+}
+li.inner_element{
+    text-align: center
+}
+.mod_badge>p, .pmp_badge>p, .mod_badge_add>p, .pmp_badge_add>p{
+    font-size: 20px;
+    /* position: relative; */
+    line-height: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0px;
+}
+.device_element{
+    border-bottom: 1px solid #E6E9ED
+}
+
+/*DEVICE FORM-GROUP*/
+div.form-group-device{
+    display:flex
+}
+div.form-group-device > button{
+    height:fit-content
+}
+/*----------------*/

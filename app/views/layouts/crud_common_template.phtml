@@ -1,0 +1,73 @@
+<div class="x_panel" role="tabpanel">
+	<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+		<li role="presentation" class="<?php echo ($this->view->getControllerName() == "devices")?"active":""; ?>">
+			<?php 
+			echo $this->tag->linkTo(
+				[
+					"devices/index",
+					"Zariadenia",
+					"role" => "tab",
+					"aria-expanded" => "false"
+				]);
+			?>
+		</li>
+		<li role="presentation" class="<?php echo ($this->view->getControllerName() == "modules")?"active":""; ?>">
+			<?php 
+			echo $this->tag->linkTo(
+				[
+					"modules/index",
+					"Moduly",
+					"role" => "tab",
+					"aria-expanded" => "false"
+				]);
+			?>
+		</li>
+		<li role="presentation" class="<?php echo ($this->view->getControllerName() == "module_types")?"active":""; ?>">
+			<?php 
+			echo $this->tag->linkTo(
+				[
+					"module_types/index",
+					"Typy modulov",
+					"role" => "tab",
+					"aria-expanded" => "false"
+				]);
+			?>
+		</li>
+		<li role="presentation" class="<?php echo ($this->view->getControllerName() == "pumps")?"active":""; ?>">
+			<?php 
+			echo $this->tag->linkTo(
+				[
+					"pumps/index",
+					"Čerpadlá",
+					"role" => "tab",
+					"aria-expanded" => "false"
+				]);
+			?>
+		</li>
+		<li role="presentation" class="<?php echo ($this->view->getControllerName() == "pump_types")?"active":""; ?>">
+			<?php 
+			echo $this->tag->linkTo(
+				[
+					"pump_types/index",
+					"Modely Čerpadiel",
+					"role" => "tab",
+					"aria-expanded" => "false"
+				]);
+			?>
+		</li>
+		<li role="presentation" class="<?php echo ($this->view->getControllerName() == "pump_subgroups")?"active":""; ?>">
+			<?php 
+			echo $this->tag->linkTo(
+				[
+					"pump_subgroups/index",
+					"Skupiny Čerpadiel",
+					"role" => "tab",
+					"aria-expanded" => "false"
+				]);
+			?>
+		</li>
+	</ul>
+	<div class="tab-content x_content content">
+		<?php echo $this->getContent(); ?>
+	</div>
+</div>
